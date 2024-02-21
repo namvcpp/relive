@@ -1,0 +1,68 @@
+name: fit_worker
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_svg: ^0.23.0
+  cupertino_icons: ^1.0.2
+  line_awesome_flutter: ^2.0.0
+  video_player: ^2.1.6
+  chewie: ^1.2.3
+  camera: ^0.10.5+3
+  google_mlkit_commons: ^0.5.0
+  dotted_line: ^3.2.2
+  image_picker: ^1.0.2
+  path: ^1.8.3
+  path_provider: ^2.1.0
+  firebase_core: ^2.15.1
+  firebase_messaging: ^14.6.7
+  shared_preferences: ^2.0.8
+  provider: ^6.0.5
+  # flutter_local_notifications: ^8.0.0
+  # awesome_notifications: ^0.8.2
+  table_calendar: ^3.0.9
+  http: ^1.1.0
+  permission_handler: ^11.0.1
+  flutter_tts: ^3.8.3
+  fl_chart: ^0.65.0
+  intl: ^0.18.1
+  syncfusion_flutter_gauges: ^24.2.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/
+    - assets/icons/
+    - assets/images/
+    - assets/videos/
+    - assets/poses/
+    - assets/videos/learn_whylowerkneeshurt.mp4
+    - assets/images/squat.jpg
+    - assets/images/hold.jpg
+    - assets/images/lunge.jpg
+
+  fonts:
+    - family: PlusBold
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+    - family: PlusRegular
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+    - family: PlusSemiBold
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
