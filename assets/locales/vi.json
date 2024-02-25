@@ -1,0 +1,23 @@
+{
+  "language_en": "Tiếng Anh",
+  "language_vi": "Tiếng Việt",
+
+  "today_screen_title": "Hôm nay",
+  "today_screen_subtitle": "Hôm nay bạn đã làm gì?",
+  "today_screen_before_work": "Trước đi làm",
+  "today_screen_before_lunch": "Trước ăn trưa",
+  "today_screen_get_more": "Thư giãn",
+  "today_screen_before_work_title_1": "Nguồn gốc của vấn đề ngực",
+  "today_screen_before_work_title_2": "Buổi tập phục hồi của bạn",
+  "today_screen_before_lunch_title": "Thời gian uống thuốc của bạn",
+  "today_screen_get_more_title": "Thư giãn với bài tập yoga",
+
+  "info_screen_title": "Tại sao đầu gối dưới của bạn bị đau?",
+  "info_screen_subtitle": "Chỉ được tạo cho bạn, dựa trên những gì bạn đã nói với chúng tôi: ",
+  "info_screen_step": "Mô tả",
+  "info_screen_step_1": "•  Đầu tiên, chúng tôi sẽ chỉ cho bạn một số nguyên nhân chính gây đau đầu gối dưới của bạn.",
+  "info_screen_step_2": "•  Thứ hai, sau đó chúng tôi sẽ giải thích chi tiết về việc đầu gối của bạn bị ảnh hưởng như thế nào bởi những hoạt động đó.",
+  "info_screen_step_3": "•  Cuối cùng, chúng tôi hiển thị cho bạn quy trình sinh học rõ ràng để xem chi tiết.",
+  "info_screen_watch": "Xem Video",
+  "info_screen_listen": "Nghe Audio"
+}

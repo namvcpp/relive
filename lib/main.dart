@@ -2,6 +2,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_worker/views/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,5 +20,6 @@ void main() async {
   //           ledColor: Colors.white)
   //     ],
   //     debug: true);
-  runApp(MyApp());
+  // await Locales.init(["en", "vi"]);
+  runApp(const MyApp());
 }

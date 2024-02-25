@@ -11,7 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  intl: any
+  flutter_localizations:
+    sdk: flutter
+  flutter_locales: any
   flutter_svg: ^0.23.0
   cupertino_icons: ^1.0.2
   line_awesome_flutter: ^2.0.0
@@ -34,7 +37,6 @@ dependencies:
   permission_handler: ^11.0.1
   flutter_tts: ^3.8.3
   fl_chart: ^0.65.0
-  intl: ^0.18.1
   syncfusion_flutter_gauges: ^24.2.6
 
 dev_dependencies:
@@ -44,17 +46,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  generate: true
   assets:
     - images/
     - assets/icons/
     - assets/images/
     - assets/videos/
     - assets/poses/
-    - assets/videos/learn_whylowerkneeshurt.mp4
-    - assets/images/squat.jpg
-    - assets/images/hold.jpg
-    - assets/images/lunge.jpg
+    - assets/locales/
+    - lib/l10n/
 
   fonts:
     - family: PlusBold

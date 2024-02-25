@@ -1,3 +1,4 @@
+import 'package:fit_worker/views/layouts/navigation.dart';
 import 'package:fit_worker/views/screens/exercise/session.flow.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_worker/utils/icon.dart';
@@ -44,7 +45,10 @@ class _DetailPlanScreenState extends State<DetailPlanScreen> {
             padding: const EdgeInsets.only(left: 10),
             child: IconButton(
               icon: closeIcon,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Navigation()),
+              ),
             ),
           ),
         ),

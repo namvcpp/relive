@@ -137,6 +137,13 @@ class SquatPosePainter extends PosePainter {
         final PoseLandmark joint2 = pose.landmarks[startType]!;
         final PoseLandmark joint3 = pose.landmarks[endType]!;
 
+        print('Angle: ${angleCalculate(joint1, joint2, joint3)}');
+
+        if (angleCalculate(joint1, joint2, joint3) < 80 ||
+            angleCalculate(joint1, joint2, joint3) > 120) {
+          return;
+        }
+
         final Offset center = Offset(
           translateX(
             joint1.x,
@@ -188,8 +195,6 @@ class SquatPosePainter extends PosePainter {
           ),
         );
 
-        
-
         double startAngle = math.atan2(
           center.dy - start.dy,
           center.dx - start.dx,
@@ -212,7 +217,7 @@ class SquatPosePainter extends PosePainter {
 
         double sweepAngle = endAngle + (math.pi - startAngle);
 
-        double radius = 50 * ((sweepAngle * 180 / math.pi)/90);
+        double radius = 50 * ((sweepAngle * 180 / math.pi) / 90);
 
         final Rect rect = Rect.fromCircle(center: center, radius: radius);
 
@@ -253,47 +258,47 @@ class SquatPosePainter extends PosePainter {
           PoseLandmarkType.rightElbow, PoseLandmarkType.rightWrist, rightPaint);
 
       //Draw Arc
-      drawArc(
-          PoseLandmarkType.leftShoulder,
-          PoseLandmarkType.leftHip, // start
-          PoseLandmarkType.leftElbow, // end
-          correctPaint,
-          size,
-          imageSize,
-          rotation,
-          cameraLensDirection);
+      // drawArc(
+      //     PoseLandmarkType.leftShoulder,
+      //     PoseLandmarkType.leftElbow, // start
+      //     PoseLandmarkType.leftHip, // end
+      //     correctPaint,
+      //     size,
+      //     imageSize,
+      //     rotation,
+      //     cameraLensDirection);
 
-      drawArc(
-          PoseLandmarkType.rightShoulder,
-          PoseLandmarkType.rightElbow, // start
-          PoseLandmarkType.rightHip, // end
-          correctPaint,
-          size,
-          imageSize,
-          rotation,
-          cameraLensDirection);
+      // drawArc(
+      //     PoseLandmarkType.rightShoulder,
+      //     PoseLandmarkType.rightHip, // start
+      //     PoseLandmarkType.rightElbow, // end
+      //     correctPaint,
+      //     size,
+      //     imageSize,
+      //     rotation,
+      //     cameraLensDirection);
 
-      drawArc(
-        PoseLandmarkType.leftKnee,
-        PoseLandmarkType.leftAnkle,
-        PoseLandmarkType.leftHip,
-        correctPaint,
-        size,
-        imageSize,
-        rotation,
-        cameraLensDirection,
-      );
+      // drawArc(
+      //   PoseLandmarkType.leftKnee,
+      //   PoseLandmarkType.leftHip,
+      //   PoseLandmarkType.leftAnkle,
+      //   correctPaint,
+      //   size,
+      //   imageSize,
+      //   rotation,
+      //   cameraLensDirection,
+      // );
 
-      drawArc(
-        PoseLandmarkType.rightKnee,
-        PoseLandmarkType.rightHip,
-        PoseLandmarkType.rightAnkle,
-        correctPaint,
-        size,
-        imageSize,
-        rotation,
-        cameraLensDirection,
-      );
+      // drawArc(
+      //   PoseLandmarkType.rightKnee,
+      //   PoseLandmarkType.rightAnkle,
+      //   PoseLandmarkType.rightHip,
+      //   correctPaint,
+      //   size,
+      //   imageSize,
+      //   rotation,
+      //   cameraLensDirection,
+      // );
 
       //Draw Body
       paintLine(

@@ -1,3 +1,4 @@
+import 'package:fit_worker/views/components/checkup/check_up.dart';
 import 'package:fit_worker/views/screens/exercise/congrat.screen.dart';
 import 'package:fit_worker/views/screens/exercise/detail_plan.screen.dart';
 import 'package:fit_worker/views/screens/exercise/hold/hold.flow.dart';
@@ -24,10 +25,8 @@ class ExerciseSessionFlowState extends State<ExerciseSessionFlow> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   static final List<Widget> _exerciseScreens = [
-    heelRaiseFlow,
     squatFlow,
     holdFlow,
-    lungeFlow,
     const CongratScreen()
   ];
 

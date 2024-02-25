@@ -1,28 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 
 class AppNotifier extends ChangeNotifier {
-  var patient = {};
-  var doctors = [];
-  var advices = [];
-  var exercises = [];
+  int evaluation = 20;
 
-  void setPatient(newpatient) {
-    patient = newpatient;
-    notifyListeners();
-  }
-
-  void setDoctors(newdoctors) {
-    doctors = newdoctors;
-    notifyListeners();
-  }
-
-  void setAdvices(newadvices) {
-    advices = newadvices;
-    notifyListeners();
-  }
-
-  void setExercises(newexercises) {
-    exercises = newexercises;
+  void setEvaluation(int value) {
+    evaluation = value;
     notifyListeners();
   }
 }

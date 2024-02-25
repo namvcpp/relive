@@ -194,9 +194,6 @@ class SquatPoseMatcher {
 
     _tempMoveValue = poseValues[4];
 
-    
-
-
     for (int i = _passCount; i < _referencePoseValues.length; i++) {
       List<double> refAngle = _referencePoseValues[i];
 
@@ -215,10 +212,9 @@ class SquatPoseMatcher {
             .toList();
 
         print('__________________________\n'
-              'Knee Left Angle: ${poseValues[4]}\n'
-              'Knee Right Angle: ${poseValues[5]}\n'
-              '__________________________\n'
-              );
+            'Knee Left Angle: ${poseValues[4]}\n'
+            'Knee Right Angle: ${poseValues[5]}\n'
+            '__________________________\n');
 
         // Check state of left elbow angle
         if (diff[0].abs() > tolerance[0]) {
@@ -279,14 +275,14 @@ class SquatPoseMatcher {
         }
 
         // Check state of left knee angle
-        if (diff[4] < 0.8 && diff[4] < (-tolerance[4] + 0.8) && _passCount < 4) {
-          message = 'Move your left knee inward';
-          errorLines.addAll([
-            [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
-            [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
-          ]);
-          messageType = 'error';
-        }
+        // if (diff[4] < 0.8 && diff[4] < (-tolerance[4] + 0.8) && _passCount < 4) {
+        //   message = 'Move your left knee inward';
+        //   errorLines.addAll([
+        //     [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
+        //     [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
+        //   ]);
+        //   messageType = 'error';
+        // }
 
         // if (diff[4] < 0.8 && diff[4] < (-tolerance[4] + 0.8) && _passCount >= 4) {
         //   message = 'Move your left knee inward';
@@ -298,14 +294,16 @@ class SquatPoseMatcher {
         // }
 
         // // Check state of right knee angle
-        if (diff[5] < 0.8 && diff[5] < (-tolerance[5] + 0.8) && _passCount < 4) {
-          message = 'Move your right knee inward';
-          errorLines.addAll([
-            [PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee],
-            [PoseLandmarkType.rightKnee, PoseLandmarkType.rightAnkle]
-          ]);
-          messageType = 'error';
-        }
+        // if (diff[5] < 0.8 &&
+        //     diff[5] < (-tolerance[5] + 0.8) &&
+        //     _passCount < 4) {
+        //   message = 'Move your right knee inward';
+        //   errorLines.addAll([
+        //     [PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee],
+        //     [PoseLandmarkType.rightKnee, PoseLandmarkType.rightAnkle]
+        //   ]);
+        //   messageType = 'error';
+        // }
       }
 
       if (_passCount == 4) {

@@ -1,3 +1,4 @@
+import 'package:fit_worker/views/components/checkup/check_up.dart';
 import 'package:fit_worker/views/screens/exercise/exercise.flow.dart';
 
 import 'hold.instruction.dart';
@@ -9,5 +10,6 @@ var holdFlow = const ExerciseFlow(
     HoldInstructionScreen(),
     HoldPreviewScreen(),
     HoldPoseDetectorView(),
+    CheckUp()
   ],
 );

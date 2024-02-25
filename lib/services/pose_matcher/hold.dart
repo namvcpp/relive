@@ -28,28 +28,21 @@ class PastValues {
 class HoldPoseMatcher {
   final List<List<double>> _referencePoseValues = [
     [
-      102.605484245588,
-      155.7578455508976,
+      95.605484245588,
+      160.7578455508976,
     ],
     [
-      162.71801261363987,
-      103.14770266305602,
+      146.71801261363987,
+      97.14770266305602,
     ]
   ];
 
   final List<double> tolerance = [10.0, 10.0];
 
-  int _currentRefPoseIndex = 0;
-  int _reps = 0;
 
-  int _poseCount = 0;
-  double _tempMoveValue = 0;
-  MoveStateType moveState = MoveStateType.none;
 
-  int _passCount = 0;
-
-  int _targetReps = 10;
-  int get targetReps => _targetReps;
+  // int _targetReps = 10;
+  // int get targetReps => _targetReps;
 
   PastValues pastValues = PastValues();
 
@@ -97,7 +90,7 @@ class HoldPoseMatcher {
             .toList();
 
     bool isLegStill(double angle) {
-      return angle > 140 && angle < 360; 
+      return angle > 140 && angle < 640; 
     }
 
     bool isLeftLegStill = isLegStill(poseValues[0]);
@@ -105,33 +98,70 @@ class HoldPoseMatcher {
     bool isRightLegStill = isLegStill(poseValues[1]);
     // print('isRightLegStill: $isRightLegStill');
 
-
-    //If the angle is approx 180 then that leg is still, then dont calculate that
+    print('poseValues: $poseValues');
     
     //If < tol & > 0 then its true OR if < 0 or > tol then its false
-    bool isMatched() {
+    bool isLeftMatched() {
+      
+      // poseValues.toList().asMap().entries.forEach((entry) {
+      //   final difference = (entry.value - leftRefAngle[entry.key]);
+      //   print('${entry.key}: ${difference}');
+      // });
+
+      // print(poseValues.toList().asMap().entries.every((entry) => ((entry.value - leftRefAngle[1]) < [90,0][entry.key])));
+      // print(poseValues.toList().asMap().entries.every((entry) => ((entry.value - leftRefAngle[entry.key]).abs() > tolerance[entry.key])));
+
+      
       if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - leftRefAngle[entry.key]).abs() < tolerance[entry.key] 
-          && (entry.value - leftRefAngle[entry.key]) > 0)) {
+          (entry.value - leftRefAngle[entry.key]).abs() < tolerance[entry.key])) {
         return true;
       } 
-      else if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - rightRefAngle[entry.key]).abs() < tolerance[entry.key]
-          && (entry.value - rightRefAngle[entry.key]) > 0)) {
-        return true;
-      } 
-      else if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - leftRefAngle[entry.key]).abs() > tolerance[entry.key])) {
-        message = "Lower your left leg";
-        errorLines.addAll([
-          [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
-          [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
-        ]);
-        messageType = 'error';
+      // else if (poseValues.toList().asMap().entries.every((entry) =>
+      //     (entry.value - leftRefAngle[entry.key]).abs() > tolerance[entry.key] 
+      //     && (entry.value - leftRefAngle[entry.key]) > [90,0][entry.key])) {
+      //   message = "Lower your left leg";
+      //   errorLines.addAll([
+      //     [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
+      //     [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
+      //   ]);
+      //   messageType = 'error';
+      //   return false;
+      // } 
+      // else if (poseValues.toList().asMap().entries.every((entry) =>
+      //     (entry.value - leftRefAngle[entry.key]).abs() > tolerance[entry.key]
+      //     && (entry.value - leftRefAngle[entry.key]) < [90,0][entry.key])) {
+      //   message = "Raise your left leg";
+      //   errorLines.addAll([
+      //     [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
+      //     [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
+      //   ]);
+      //   messageType = 'error';
+      //   return false;
+      // }
+      else {
         return false;
+      }
+    }
+
+    bool isRightMatched() {
+      
+      // poseValues.toList().asMap().entries.forEach((entry) {
+      //   final difference = (entry.value - leftRefAngle[entry.key]);
+      //   print('${entry.key}: ${difference}');
+      // });
+
+      // print(poseValues.toList().asMap().entries.every((entry) => ((entry.value - leftRefAngle[1]) < [90,0][entry.key])));
+      // print(poseValues.toList().asMap().entries.every((entry) => ((entry.value - leftRefAngle[entry.key]).abs() > tolerance[entry.key])));
+
+      
+      if (poseValues.toList().asMap().entries.every((entry) =>
+          (entry.value - rightRefAngle[entry.key]).abs() < tolerance[entry.key]
+      )) {
+        return true;
       } 
       else if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - rightRefAngle[entry.key]).abs() > tolerance[entry.key])) {
+          (entry.value - rightRefAngle[entry.key]).abs() > tolerance[entry.key]
+          && (entry.value - rightRefAngle[entry.key]) > [90,0][entry.key])) {
         message = "Lower your right leg";
         errorLines.addAll([
           [PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee],
@@ -141,17 +171,8 @@ class HoldPoseMatcher {
         return false;
       } 
       else if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - leftRefAngle[entry.key]).abs() < 0)) {
-        message = "Raise your left leg";
-        errorLines.addAll([
-          [PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee],
-          [PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle]
-        ]);
-        messageType = 'error';
-        return false;
-      }
-      else if (poseValues.toList().asMap().entries.every((entry) =>
-          (entry.value - rightRefAngle[entry.key]).abs() < 0)) {
+          (entry.value - rightRefAngle[entry.key]).abs() > tolerance[entry.key]
+          && (entry.value - rightRefAngle[entry.key]) < [90,0][entry.key])) {
         message = "Raise your right leg";
         errorLines.addAll([
           [PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee],
@@ -164,14 +185,15 @@ class HoldPoseMatcher {
         return false;
       }
     }
-
-    // print(isMatched());
+    
+    // print('isMatched: $isMatched()');
     // print(isRightLegStill);
     // print(isLeftLegStill);
 
     return {
-      'isMatched': isMatched(),
-      'isLegStill': isLeftLegStill,
+      'isLeftMatched': isLeftMatched(),
+      'isRightMatched': isRightMatched(),
+      'isLeftLegStill': isLeftLegStill,
       'isRightLegStill': isRightLegStill,
       'message': message,
       'messageType': messageType,

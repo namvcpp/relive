@@ -1,0 +1,23 @@
+{
+  "language_en": "English",
+  "language_vi": "Vietnamese",
+
+  "today_screen_title": "Today's Plan",
+  "today_screen_subtitle": "This is your plan for today based on your progress",
+  "today_screen_before_work": "Before work",
+  "today_screen_before_lunch": "Before lunch",
+  "today_screen_get_more": "Get time for more",
+  "today_screen_before_work_title_1": "Origins of your chest problems",
+  "today_screen_before_work_title_2": "Your recovery exercise session",
+  "today_screen_before_lunch_title": "Time to take your medicines",
+  "today_screen_get_more_title": "Relax with Meditation therapy session",
+
+  "info_screen_title": "Why your lower knees hurt?",
+  "info_screen_subtitle": "Created only for you, based on what you told us: ",
+  "info_screen_step": "Description",
+  "info_screen_step_1": "•  First, we will show you some main reasons that cause pains in your lower knees.",
+  "info_screen_step_2": "•  Second, we then elaborate on how your knees are affected by those activities.",
+  "info_screen_step_3": "•  Last, we show you the clear biological process for detailed view.",
+  "info_screen_watch": "Watch Video",
+  "info_screen_listen": "Listen Audio"
+}

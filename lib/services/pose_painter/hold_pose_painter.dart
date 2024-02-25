@@ -12,12 +12,15 @@ class HoldPosePainter extends PosePainter {
     Size imageSize,
     InputImageRotation rotation,
     CameraLensDirection cameraLensDirection,
-    this.isMatched,
+    List<List<PoseLandmarkType>>? errorLines,
+    this.isLeftMatched,
+    this.isRightMatched,
     this.isLeftLegStill,
     this.isRightLegStill,
-  ) : super(poses, imageSize, rotation, cameraLensDirection, []);
+  ) : super(poses, imageSize, rotation, cameraLensDirection, errorLines);
 
-  final bool isMatched;
+  final bool isLeftMatched;
+  final bool isRightMatched;
   final bool isLeftLegStill;
   final bool isRightLegStill;
 
@@ -42,6 +45,11 @@ class HoldPosePainter extends PosePainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 12.0
       ..color = Colors.green;
+
+    final errorPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8.0
+      ..color = Colors.red;
 
     for (final pose in poses) {
       pose.landmarks.forEach(
@@ -272,15 +280,24 @@ class HoldPosePainter extends PosePainter {
             cameraLensDirection);
       }
 
-      if (isMatched) {
+      if (isLeftMatched) {
         paintLine(PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle,
             correctPaint);
         paintLine(
             PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee, correctPaint);
+      }
+      
+      if (isRightMatched) {
         paintLine(PoseLandmarkType.rightKnee, PoseLandmarkType.rightAnkle,
             correctPaint);
-        paintLine(PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee,
-            correctPaint);
+        paintLine(
+            PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee, correctPaint);
+      }
+
+      if (errorLines!.isNotEmpty) {
+        for (final errorLine in errorLines!) {
+          paintLine(errorLine[0], errorLine[1], errorPaint);
+        }
       }
     }
   }

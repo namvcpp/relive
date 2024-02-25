@@ -1,6 +1,5 @@
 import 'package:fit_worker/utils/icon.dart';
 import 'package:fit_worker/views/screens/exercise/exercise.flow.dart';
-import 'package:fit_worker/views/screens/exercise/squat/squat_pose_detector.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:fit_worker/views/app.dart';

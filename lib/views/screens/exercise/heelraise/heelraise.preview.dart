@@ -56,7 +56,7 @@ class _HeelRaisePreviewScreenState extends State<HeelRaisePreviewScreen> {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 icon: closeIcon,
-                onPressed: () => ExerciseFlow.of(context).goToNextScreen(),
+                onPressed: () => ExerciseFlow.of(context).goToPreviousScreen(),
               ),
             ),
           ),

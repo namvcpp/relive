@@ -10,3 +10,6 @@ Image videoImg = Image.asset('assets/images/video.png');
 
 Image pill1Img = Image.asset('assets/images/Pill1.png');
 Image pill2Img = Image.asset('assets/images/Pill2.png');
+
+Image enLangImg = Image.asset('assets/images/english_lang.png');
+Image viLangImg = Image.asset('assets/images/vietnamese_lang.png');

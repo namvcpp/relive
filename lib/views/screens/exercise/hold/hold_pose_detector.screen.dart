@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:fit_worker/views/components/exercise/timeCountPane.dart';
 
 class HoldPoseDetectorView extends StatefulWidget {
   const HoldPoseDetectorView({super.key});
@@ -41,7 +42,8 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
     _poseSubscription.cancel();
     _customPaint = null;
     _poseData = null;
-    _stopTimer();
+    _stopLeftTimer();
+    _stopRightTimer();
   }
 
   Future<PermissionStatus> _getCameraPermission() async {
@@ -54,24 +56,51 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
     }
   }
 
-  int _timerDuration = 0; // Set the initial timer duration in seconds
-  bool _isTimerRunning = false;
+  int _leftTargetDuration = 5; // Set the initial timer duration in seconds
+  int _rightTargetDuration = 5; // Set the initial timer duration in seconds
 
-  void _startTimer() {
-    if (!_isTimerRunning) {
+
+  int _leftTimerDuration = 0; // Set the initial timer duration in seconds
+  bool _isLeftTimerRunning = false;
+  bool _leftEnabled = true;
+
+  void _startLeftTimer() {
+    if (!_isLeftTimerRunning) {
       _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setState(() {
-          _timerDuration++;
+          _leftTimerDuration++;
         });
       });
-      _isTimerRunning = true;
+      _isLeftTimerRunning = true;
     }
   }
 
-  void _stopTimer() {
-    if (_isTimerRunning) {
+  void _stopLeftTimer() {
+    if (_isLeftTimerRunning) {
       _timer.cancel();
-      _isTimerRunning = false;
+      _isLeftTimerRunning = false;
+    }
+  }
+
+  int _rightTimeDuration = 0; // Set the initial timer duration in seconds
+  bool _isRightTimerRunning = false;
+  bool _rightEnabled = true;
+
+  void _startRightTimer() {
+    if (!_isRightTimerRunning) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        setState(() {
+          _rightTimeDuration++;
+        });
+      });
+      _isRightTimerRunning = true;
+    }
+  }
+
+  void _stopRightTimer() {
+    if (_isRightTimerRunning) {
+      _timer.cancel();
+      _isRightTimerRunning = false;
     }
   }
 
@@ -82,9 +111,7 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
   }
 
   void navigateToNextScreen() {
-    if (_timerDuration == 30) {
       ExerciseFlow.of(context).goToNextScreen();
-    }
   }
 
   @override
@@ -102,18 +129,35 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
             _poseMatcher.compareWithReferencePoses(
           _poseData!.pose,
         );
+        
+        // print(poseDataStream);
 
-        bool isMatched = poseDataStream['isMatched'] ?? false;
+        bool isLeftMatched = poseDataStream['isLeftMatched'] ?? false;
+        bool isRightMatched = poseDataStream['isRightMatched'] ?? false;
         bool isLeftLegStill = poseDataStream['isLeftLegStill'] ?? false;
         bool isRightLegStill = poseDataStream['isRightLegStill'] ?? false;
 
-        _updateCustomPaint(isMatched, isLeftLegStill, isRightLegStill);
+        _updateCustomPaint(poseDataStream['errorLines'], isLeftMatched, isRightMatched, isLeftLegStill, isRightLegStill);
 
-        if (isMatched) {
-          _startTimer(); // Resume the timer when a valid pose is detected
-          navigateToNextScreen();
+        if (isLeftMatched && _leftEnabled) {
+          _startLeftTimer();
+          if (_leftTimerDuration == _leftTargetDuration) {
+            _stopLeftTimer();
+            _leftEnabled = false;
+          } // Resume the timer when a valid pose is detected
         } else {
-          _stopTimer(); // Stop the timer when a valid pose is not detected
+          _stopLeftTimer(); // Stop the timer when a valid pose is not detected
+        }
+
+        if ((_leftTimerDuration == _leftTargetDuration) && isRightMatched) {
+          _startRightTimer();
+          if (_rightTimeDuration == _rightTargetDuration) {
+            _stopRightTimer();
+            _rightEnabled = false;
+            navigateToNextScreen();
+          } // Resume the timer when a valid pose is detected
+        } else {
+          _stopRightTimer();
         }
       }
 
@@ -133,14 +177,17 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
 
   // Method to generate the CustomPaint when _poseData is not null
   void _updateCustomPaint(
-      bool isMatched, bool isLeftLegStill, bool isRightLegStill) {
+      List<List<PoseLandmarkType>> errorLines,
+      bool isLeftMatched, bool isRightMatched, bool isLeftLegStill, bool isRightLegStill) {
     if (_poseData != null) {
       final painter = HoldPosePainter(
           [_poseData!.pose],
           _poseData!.inputImageSize,
           InputImageRotation.rotation270deg,
           CameraLensDirection.front,
-          isMatched,
+          errorLines,
+          isLeftMatched,
+          isRightMatched,
           isLeftLegStill,
           isRightLegStill);
       _customPaint = CustomPaint(painter: painter);
@@ -154,25 +201,7 @@ class _HoldPoseDetectorViewState extends State<HoldPoseDetectorView> {
         top: 130,
         right: 80,
         left: 80,
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          height: 80,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Center(
-            child: Text(
-              '${_formatTime(_timerDuration)} / 0:30',
-              style: const TextStyle(
-                color: Color(0xff1B2C56),
-                fontSize: 30,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
-        ),
+        child: TimeCountPane(currentTime: _leftTimerDuration + _rightTimeDuration, targetTime: _leftTargetDuration + _rightTargetDuration),
       );
 
   @override

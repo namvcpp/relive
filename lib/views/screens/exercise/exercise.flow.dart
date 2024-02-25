@@ -27,7 +27,7 @@ class ExerciseFlowState extends State<ExerciseFlow> {
     }
 
     setState(() {
-      _currentScreenIndex--;
+      if (_currentScreenIndex > 0) _currentScreenIndex--;
     });
   }
 

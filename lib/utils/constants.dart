@@ -1,3 +1,5 @@
+import 'package:flutter_locales/flutter_locales.dart';
+
 import './icon.dart';
 
 const api = "http://117.1.29.174:6000";
@@ -5,7 +7,7 @@ final planCardsbefore = [
   {
     'bgColor': 0xFFFCEABC,
     'isSelected': true,
-    'title': "Origins of your chest problems?",
+    'title': "today_screen_before_work_title_1",
     'Icon1': mediaIcon,
     'Icon2': clockIcon,
     'Text1': "Learn",
@@ -15,7 +17,7 @@ final planCardsbefore = [
   {
     'bgColor': 0xFFB9E9FD,
     'isSelected': true,
-    'title': "Your recovery exercise session",
+    'title': "today_screen_before_work_title_2",
     'Icon1': fitnessIcon,
     'Icon2': clockIcon,
     'Text1': "Exercise",
@@ -28,7 +30,7 @@ final planCardsafter = [
   {
     'bgColor': 0xFFEBDCFF,
     'isSelected': false,
-    'title': "Time to take your medicines",
+    'title': "today_screen_before_lunch_title",
     'Icon1': pillIcon,
     'Icon2': clockIcon,
     'Text1': "Pills",
@@ -38,7 +40,7 @@ final planCardsafter = [
   {
     'bgColor': 0xFFC8FFC7,
     'isSelected': false,
-    'title': "Relax with Meditation therapy session",
+    'title': "today_screen_get_more_title",
     'Icon1': stepIcon,
     'Icon2': clockIcon,
     'Text1': 'Therapy',

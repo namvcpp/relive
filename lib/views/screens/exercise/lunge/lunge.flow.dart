@@ -1,3 +1,4 @@
+import 'package:fit_worker/views/components/checkup/check_up.dart';
 import 'package:fit_worker/views/screens/exercise/exercise.flow.dart';
 
 import 'lunge.instruction.dart';
@@ -9,5 +10,6 @@ var lungeFlow = const ExerciseFlow(
     LungeInstructionScreen(),
     LungePreviewScreen(),
     LungePoseDetectorView(),
+    CheckUp()
   ],
 );

@@ -31,3 +31,8 @@ Widget facebookIcon = SvgPicture.asset("assets/icons/facebook.svg");
 Widget wrongIcon = SvgPicture.asset("assets/icons/wrong.svg");
 Widget greatIcon = SvgPicture.asset("assets/icons/great.svg");
 
+Widget worstIcon = SvgPicture.asset("assets/icons/worst.svg");
+Widget poorIcon = SvgPicture.asset("assets/icons/poor.svg");
+Widget fairIcon = SvgPicture.asset("assets/icons/fair.svg");
+Widget goodIcon = SvgPicture.asset("assets/icons/good.svg");
+Widget excellentIcon = SvgPicture.asset("assets/icons/excellent.svg");
